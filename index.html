@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jobsuche Köln – Simon Kupferschmidt</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card-bg: #ffffff;
+    --accent: #1d4ed8;
+    --accent-light: #dbeafe;
+    --text: #1e293b;
+    --muted: #64748b;
+    --green: #16a34a;
+    --amber: #d97706;
+    --red: #dc2626;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 220px, #f1f5f9 220px);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  header {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 20px;
+    color: #fff;
+  }
+  header h1 {
+    margin: 0 0 8px;
+    font-size: 1.9rem;
+  }
+  header p {
+    margin: 4px 0;
+    color: #cbd5e1;
+    font-size: 0.95rem;
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    color: var(--muted);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot.active { background: var(--green); }
+  .dot.unclear { background: var(--amber); }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.08);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+  }
+  .rank {
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .company {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    font-weight: 700;
+    margin-top: 6px;
+  }
+  .role {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .role a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .role a:hover { color: var(--accent); text-decoration: underline; }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .meta span { display: flex; align-items: center; gap: 5px; }
+  .salary {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+    background: var(--accent-light);
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 8px;
+    width: fit-content;
+  }
+  .status {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+  }
+  .status.active { color: var(--green); font-weight: 600; }
+  .status.unclear { color: var(--amber); font-weight: 600; }
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10px 24px 60px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+  .updated {
+    color: #94a3b8;
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎯 Jobsuche Köln – Strategy &amp; Transformation</h1>
+  <p>Profil: Senior Strategy Consultant · Transformation &amp; Investment-Portfoliomanagement</p>
+  <p class="updated">Basis: Landsbergstraße 42, 50678 Köln · Stand: Juli 2026</p>
+</header>
+
+<div class="container">
+  <div class="legend">
+    <span class="badge"><span class="dot active"></span> Stelle aktuell aktiv</span>
+    <span class="badge"><span class="dot unclear"></span> Status/Aktualität vor Bewerbung prüfen</span>
+  </div>
+
+  <div class="cards" id="cards"></div>
+</div>
+
+<footer>
+  <p>Gehaltsangaben sind Schätzungen auf Basis von Glassdoor-, Stepstone- und gehalt.de-Benchmarks bzw. Tariftabellen (TVöD-S) – die Stellenanzeigen selbst nennen i. d. R. keine Gehälter. Distanzen wurden per Routing (OpenStreetMap/OSRM) für die Autofahrt berechnet. Diese Seite ist eine private Recherchezusammenstellung und keine offizielle Stellenbörse.</p>
+</footer>
+
+<script>
+const jobs = [
+  {
+    rank: 1,
+    company: "REWE Group",
+    role: "(Senior) Berater/Projektleiter Strategie (m/w/d)",
+    link: "https://karriere.rewe-group.com/konzernzentrale/job/K%C3%B6ln-(Senior)-Berater-Projektleiter-Strategie-(mwd)-NW-50933/1287747001/",
+    address: "Domstraße 20, 50668 Köln",
+    distance: "3,3 km · 6 Min (Auto)",
+    salary: "€75.000 – 95.000",
+    status: "active",
+    statusText: "Aktiv (veröffentlicht 28.06.2026)"
+  },
+  {
+    rank: 2,
+    company: "REWE Group",
+    role: "Senior Berater Inhouse Consulting (m/w/d)",
+    link: "https://karriere.rewe-group.com/konzernzentrale/job/K%C3%B6ln-Senior-Berater-Inhouse-Consulting-(mwd)-NW-50933/744931801/",
+    address: "Domstraße 20, 50668 Köln",
+    distance: "3,3 km · 6 Min (Auto)",
+    salary: "€70.000 – 90.000",
+    status: "active",
+    statusText: "Aktiv (veröffentlicht 16.06.2026)"
+  },
+  {
+    rank: 3,
+    company: "REWE Group",
+    role: "Senior Projektleiter Inhouse Consulting (m/w/d)",
+    link: "https://karriere.rewe-group.com/jobs/suchen?facilities%5B%5D=Strategie%2FBusiness+Development",
+    address: "Domstraße 20, 50668 Köln",
+    distance: "3,3 km · 6 Min (Auto)",
+    salary: "€85.000 – 105.000",
+    status: "unclear",
+    statusText: "Vermutlich aktiv"
+  },
+  {
+    rank: 4,
+    company: "Sparkasse KölnBonn",
+    role: "Abteilungsleitung Strategie (m/w/d)",
+    link: "https://www.sparkasse.de/jobboerse/jobangebot/abteilungsleitung-strategie-m-w-d-bei-der-sparkasse-koeln-bonn-sparkasse-koeln-bonn-209955.html",
+    address: "Im Mediapark 7, 50670 Köln",
+    distance: "4,2 km · 8,5 Min (Auto)",
+    salary: "€90.000 – 115.000",
+    status: "active",
+    statusText: "Aktiv"
+  },
+  {
+    rank: 5,
+    company: "RheinEnergie AG",
+    role: "Senior Expert Transformation (m/w/d)",
+    link: "https://www.rheinenergie.com/karriere/jobs/stellenangebote/",
+    address: "Parkgürtel 24, 50823 Köln",
+    distance: "7,2 km · 13 Min (Auto)",
+    salary: "€80.000 – 90.000",
+    status: "active",
+    statusText: "Aktiv"
+  },
+  {
+    rank: 6,
+    company: "LANXESS",
+    role: "Senior Strategy Consultant (f/m/d)",
+    link: "https://career.lanxess.com/job/K%C3%B6ln-Senior-Strategy-Consultant-(fmd)-NW-50679/1262399201/",
+    address: "Kennedyplatz 1, 50569 Köln",
+    distance: "3,5 km · 7 Min (Auto)",
+    salary: "€85.000 – 115.000",
+    status: "unclear",
+    statusText: "Posting von Nov. 2025 indexiert – Aktualität prüfen"
+  },
+  {
+    rank: 7,
+    company: "LANXESS",
+    role: "Senior Strategy Manager (w/m/d)",
+    link: "https://career.lanxess.com/job/K%C3%B6ln-Senior-Strategy-Manager-(wmd)-NW-50679/1154464501/",
+    address: "Kennedyplatz 1, 50569 Köln",
+    distance: "3,5 km · 7 Min (Auto)",
+    salary: "€90.000 – 120.000",
+    status: "unclear",
+    statusText: "Status unklar (JS-Portal)"
+  },
+  {
+    rank: 8,
+    company: "AXA Konzern AG",
+    role: "Senior Consultant Business Development (m/w/d)",
+    link: "https://www.axa.de/karriere/jobs-consulting-strategie",
+    address: "Colonia-Allee 10-20, 51067 Köln",
+    distance: "11,8 km · 17 Min (Auto)",
+    salary: "€75.000 – 100.000",
+    status: "unclear",
+    statusText: "Status unklar"
+  },
+  {
+    rank: 9,
+    company: "DEVK Versicherungen",
+    role: "Projektportfolio-Manager (m/w/d)",
+    link: "https://jobs.devk.de/jobs/",
+    address: "Riehler Straße 190, 50735 Köln (aktuell Interim Deutz)",
+    distance: "3,5–4,6 km · 7–8 Min (Auto)",
+    salary: "€75.000 – 90.000",
+    status: "unclear",
+    statusText: "Ursprüngl. Posting abgelaufen – Bereich seit 01/2026 unter Vorstandsvorsitz, Neuausschreibung wahrscheinlich"
+  },
+  {
+    rank: 10,
+    company: "Kreissparkasse Köln",
+    role: "KI-Manager (m/w/d) – Fokus Implementierung",
+    link: "https://www.sparkasse.de/jobboerse/jobangebot/ki-manager-m-w-d-fokus-implementierung-kreissparkasse-koeln-220458.html",
+    address: "Neumarkt 18-24, 50667 Köln",
+    distance: "2,3 km · 5,6 Min (Auto)",
+    salary: "€75.000 – 90.000",
+    status: "active",
+    statusText: "Aktiv (Gehalt in Anzeige bestätigt)"
+  },
+  {
+    rank: 11,
+    company: "Kreissparkasse Köln",
+    role: "Senior Projektmanager:in und Programmmanager:in (m/w/d)",
+    link: "https://www.sparkasse.de/jobboerse/jobangebot/senior-projektmanager-in-und-programmmanager-in-m-w-d-kreissparkasse-koeln-167716.html",
+    address: "Neumarkt 18-24, 50667 Köln",
+    distance: "2,3 km · 5,6 Min (Auto)",
+    salary: "€70.000 – 90.000",
+    status: "unclear",
+    statusText: "Posting wirkt älter (~2024) – prüfen"
+  }
+];
+
+const container = document.getElementById("cards");
+jobs.forEach(job => {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `
+    <span class="rank">#${job.rank}</span>
+    <div class="company">${job.company}</div>
+    <div class="role"><a href="${job.link}" target="_blank" rel="noopener">${job.role}</a></div>
+    <div class="meta">
+      <span>📍 ${job.address}</span>
+      <span>🚗 ${job.distance}</span>
+    </div>
+    <div class="salary">💰 ${job.salary} / Jahr</div>
+    <div class="status ${job.status}">
+      <span class="dot ${job.status}" style="width:8px;height:8px;border-radius:50%;background:currentColor;"></span>
+      ${job.statusText}
+    </div>
+  `;
+  container.appendChild(card);
+});
+</script>
+
+</body>
+</html>

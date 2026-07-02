@@ -84,20 +84,20 @@
 <header>
   <h1>🎯 Jobsuche Köln – Strategy &amp; Transformation</h1>
   <p>Profil: Senior Strategy Consultant · Transformation &amp; Investment-Portfoliomanagement</p>
-  <p>Ranking-Modell: <b>50 % Match</b> (Passung zum Profil) · <b>30 % Gehalt</b> · <b>20 % Fahrzeit</b></p>
+  <p>Ranking-Modell: <b>50 % Match</b> (Passung zum Profil) · <b>30 % Gehalt</b> · <b>20 % Fahrzeit</b> · alle Standorte ≤ 30 Min</p>
   <p class="updated">Basis: Landsbergstraße 42, 50678 Köln · Nur verifizierte Stellen · Link-Check: 02.07.2026</p>
 </header>
 
 <div class="container">
   <div class="legend">
     <span class="badge"><span class="dot active"></span> Direktlink zur Anzeige verifiziert</span>
-    <span class="badge"><span class="dot unclear"></span> Stelle bestätigt, aber nur über Stellenliste erreichbar</span>
+    <span class="badge"><span class="dot unclear"></span> Stelle bestätigt, Portal dynamisch/cookie-geschützt (über Liste/Suche erreichbar)</span>
   </div>
   <div class="cards" id="cards"></div>
 </div>
 
 <footer>
-  <p><b>Methodik:</b> Es werden nur Stellen angezeigt, deren Existenz am 02.07.2026 bestätigt wurde. Grüne Einträge verlinken direkt auf die aktive Einzelanzeige; gelbe Einträge sind inhaltlich bestätigt, deren Portal lädt die Anzeige aber dynamisch, sodass nur die Stellenliste verlinkt werden kann (dort nach dem Rollennamen suchen). Match-Score = fachliche Passung zum Profil. Gehalts-Score = normierte Mitte der geschätzten/angegebenen Gehaltsspanne (Benchmarks bzw. Anzeige). Fahrzeit-Score = normierte Auto-Fahrzeit ab Landsbergstraße 42 (Routing via OpenStreetMap/OSRM). Gesamt = 0,5×Match + 0,3×Gehalt + 0,2×Fahrzeit. Private Recherchezusammenstellung, keine offizielle Stellenbörse.</p>
+  <p><b>Methodik:</b> Es werden nur Stellen angezeigt, deren Existenz am 02.07.2026 bestätigt wurde. Grüne Einträge verlinken direkt auf die aktive Einzelanzeige; gelbe Einträge sind inhaltlich bestätigt, deren Portal lädt die Anzeige aber dynamisch bzw. hinter einem Cookie-Banner (Rollennamen in der Liste/Suche eingeben). Match-Score = fachliche Passung zum Profil. Gehalts-Score = normierte Mitte der geschätzten/angegebenen Gehaltsspanne. Fahrzeit-Score = normierte Auto-Fahrzeit ab Landsbergstraße 42 (Routing via OpenStreetMap/OSRM); alle Standorte liegen innerhalb von 30 Fahrminuten. Gesamt = 0,5×Match + 0,3×Gehalt + 0,2×Fahrzeit. Private Recherchezusammenstellung, keine offizielle Stellenbörse.</p>
 </footer>
 
 <script>
@@ -127,6 +127,11 @@ const jobs = [
     address: "Domstraße 20, 50668 Köln", distance: "3,3 km · 6 Min", salary: "€70.000 – 90.000",
     match: 90, gehalt: 45, zeit: 96, total: 78,
     status: "active", statusText: "Verifiziert – aktiv (veröffentlicht 16.06.2026)" },
+  { company: "RTL Deutschland", role: "Business Development & Strategy Manager (m/f/d)",
+    link: "https://jobsearch.createyourowncareer.com/RTL/job/K%C3%B6ln-Business-Development-&-Strategy-Manager-(mfd)-NW-50679/282448-de_DE/",
+    address: "Picassoplatz 1, 50679 Köln (Deutz)", distance: "3,6 km · 7 Min", salary: "€75.000 – 95.000",
+    match: 85, gehalt: 55, zeit: 92, total: 77,
+    status: "unclear", statusText: "Anzeige indexiert – RTL-Portal cookie-geschützt, ggf. über Jobsuche „Business Development & Strategy“ öffnen" },
   { company: "Deloitte", role: "Senior Consultant AI & Data Strategy (m/w/d)",
     link: "https://job.deloitte.com/job-senior-consultant-ai-data-strategy-mwd-_48993",
     address: "Magnusstraße 11, 50672 Köln", distance: "3,2 km · 7 Min", salary: "€75.000 – 95.000",
@@ -146,7 +151,12 @@ const jobs = [
     link: "https://jobs.malteser.de/de/job-offer-list/job-detail/Referent-im-Buero-der-Geschaeftsleitung:-Schwerpunkt-Strategie-m-w-d-8121.html",
     address: "Erna-Scheffler-Str. 2, 51103 Köln (Kalk)", distance: "4,7 km · 9 Min", salary: "€55.000 – 70.000",
     match: 60, gehalt: 14, zeit: 84, total: 51,
-    status: "active", statusText: "Verifiziert – Direktlink aufrufbar (02.07.2026)" }
+    status: "active", statusText: "Verifiziert – Direktlink aufrufbar (02.07.2026)" },
+  { company: "igus SE & Co. KG", role: "Business Development Manager RBTX (m/w/d)",
+    link: "https://karriere.igus.de/offer/business-development-manager-rbtx-m/b9b4eaed-877b-5182-b137-986e62d388ad",
+    address: "Spicher Str. 1a, 51147 Köln (Porz)", distance: "19 km · 20 Min", salary: "€70.000 – 90.000",
+    match: 52, gehalt: 45, zeit: 40, total: 48,
+    status: "active", statusText: "Verifiziert – aktiv, aber: Startup-Background gefordert & viel Asien-Reise" }
 ];
 
 const container = document.getElementById("cards");

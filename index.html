@@ -35,7 +35,6 @@
   }
   .dot { width: 8px; height: 8px; border-radius: 50%; }
   .dot.active { background: var(--green); }
-  .dot.unclear { background: var(--amber); }
   .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 16px; }
   .card {
     background: var(--card-bg); border-radius: 14px; padding: 18px 20px;
@@ -71,7 +70,6 @@
   }
   .status { font-size: 0.8rem; display: flex; align-items: center; gap: 6px; color: var(--muted); }
   .status.active { color: var(--green); font-weight: 600; }
-  .status.unclear { color: var(--amber); font-weight: 600; }
   footer {
     max-width: 1100px; margin: 0 auto; padding: 10px 24px 60px;
     color: var(--muted); font-size: 0.8rem; line-height: 1.6;
@@ -85,118 +83,52 @@
   <h1>🎯 Jobsuche Köln – Strategy &amp; Transformation</h1>
   <p>Profil: Senior Strategy Consultant · Transformation &amp; Investment-Portfoliomanagement</p>
   <p>Ranking-Modell: <b>50 % Match</b> (Passung zum Profil) · <b>30 % Gehalt</b> · <b>20 % Fahrzeit</b></p>
-  <p class="updated">Basis: Landsbergstraße 42, 50678 Köln · ~45 Kölner Unternehmen geprüft · Stand: Juli 2026</p>
+  <p class="updated">Basis: Landsbergstraße 42, 50678 Köln · Nur verifizierte, aufrufbare Stellenanzeigen · Link-Check: 02.07.2026</p>
 </header>
 
 <div class="container">
   <div class="legend">
-    <span class="badge"><span class="dot active"></span> Stelle aktuell aktiv</span>
-    <span class="badge"><span class="dot unclear"></span> Status/Aktualität vor Bewerbung prüfen</span>
+    <span class="badge"><span class="dot active"></span> Stelle verifiziert &amp; aktuell aufrufbar</span>
   </div>
   <div class="cards" id="cards"></div>
 </div>
 
 <footer>
-  <p><b>Methodik:</b> Match-Score = fachliche Passung der Rolle zum Profil (Strategieberatung, Transformation, Portfoliomanagement, C-Level-Kommunikation, agile Methoden). Gehalts-Score = normierte Mitte der geschätzten Gehaltsspanne (Basis: Glassdoor-, Stepstone-, gehalt.de-Benchmarks bzw. Tariftabellen; Stellenanzeigen nennen i. d. R. keine Gehälter). Fahrzeit-Score = normierte Auto-Fahrzeit ab Landsbergstraße 42 (Routing via OpenStreetMap/OSRM). Gesamt = 0,5×Match + 0,3×Gehalt + 0,2×Fahrzeit. Private Recherchezusammenstellung, keine offizielle Stellenbörse.</p>
+  <p><b>Methodik:</b> Es werden ausschließlich Stellen angezeigt, deren Direktlink am 02.07.2026 auf eine konkrete, aktive Anzeige aufgelöst hat. Match-Score = fachliche Passung zum Profil (Strategieberatung, Transformation, Portfoliomanagement, C-Level-Kommunikation, agile Methoden). Gehalts-Score = normierte Mitte der geschätzten Gehaltsspanne (Glassdoor-/Stepstone-/gehalt.de-Benchmarks bzw. Tariftabellen; Anzeigen nennen i. d. R. keine Gehälter). Fahrzeit-Score = normierte Auto-Fahrzeit ab Landsbergstraße 42 (Routing via OpenStreetMap/OSRM). Gesamt = 0,5×Match + 0,3×Gehalt + 0,2×Fahrzeit. Private Recherchezusammenstellung, keine offizielle Stellenbörse.</p>
 </footer>
 
 <script>
 const jobs = [
-  { company: "Zurich Gruppe Deutschland", role: "(Senior) Strategy Manager (m/w/d)",
-    link: "https://www.rheinland.jobs/job/senior-strategy-manager-m-w-d-14137835",
-    address: "MesseCity Köln-Deutz", distance: "5,9 km · 10 Min", salary: "€90.000 – 120.000",
-    match: 90, gehalt: 91, zeit: 80, total: 88,
-    status: "active", statusText: "Aktiv – Strategieabteilung Zurich Deutschland" },
-  { company: "LANXESS", role: "Senior Strategy Manager (w/m/d)",
-    link: "https://career.lanxess.com/job/K%C3%B6ln-Senior-Strategy-Manager-(wmd)-NW-50679/1154464501/",
-    address: "Kennedyplatz 1, 50569 Köln (Deutz)", distance: "3,5 km · 7 Min", salary: "€90.000 – 120.000",
-    match: 85, gehalt: 91, zeit: 92, total: 88,
-    status: "unclear", statusText: "Status prüfen (JS-Portal)" },
   { company: "REWE Group", role: "Senior Projektleiter Inhouse Consulting (m/w/d)",
     link: "https://karriere.rewe-group.com/konzernzentrale/job/K%C3%B6ln-Senior-Projektleiter-Inhouse-Consulting-(mwd)-NW-50933/902369301/",
     address: "Domstraße 20, 50668 Köln", distance: "3,3 km · 6 Min", salary: "€85.000 – 105.000",
     match: 92, gehalt: 73, zeit: 96, total: 87,
-    status: "unclear", statusText: "Vermutlich aktiv – auf Karriereseite prüfen" },
-  { company: "LANXESS", role: "Senior Strategy Consultant (f/m/d)",
-    link: "https://career.lanxess.com/job/K%C3%B6ln-Senior-Strategy-Consultant-(fmd)-NW-50679/1262399201/",
-    address: "Kennedyplatz 1, 50569 Köln (Deutz)", distance: "3,5 km · 7 Min", salary: "€85.000 – 115.000",
-    match: 85, gehalt: 82, zeit: 92, total: 85,
-    status: "unclear", statusText: "Posting Nov. 2025 indexiert – Aktualität prüfen" },
-  { company: "BarmeniaGothaer", role: "Product Owner*in Strategie (Leitung Strategieentwicklung)",
-    link: "https://karriere.barmeniagothaer.de/stellenmarkt/details/job/product-owner-strategie-koeln-01042026/",
-    address: "Gothaer Allee 1, 50969 Köln (Zollstock)", distance: "3,9 km · 8 Min", salary: "€85.000 – 110.000",
-    match: 88, gehalt: 77, zeit: 88, total: 85,
-    status: "active", statusText: "Aktiv – ideale Kombination aus PO-Rolle & Strategie" },
+    status: "active", statusText: "Verifiziert – Link aufrufbar (02.07.2026)" },
   { company: "REWE Group", role: "(Senior) Berater / Projektleiter Strategie (m/w/d)",
     link: "https://karriere.rewe-group.com/konzernzentrale/job/K%C3%B6ln-(Senior)-Berater-Projektleiter-Strategie-(mwd)-NW-50933/1287747001/",
     address: "Domstraße 20, 50668 Köln", distance: "3,3 km · 6 Min", salary: "€75.000 – 95.000",
     match: 95, gehalt: 55, zeit: 96, total: 83,
-    status: "active", statusText: "Aktiv (veröffentlicht 28.06.2026)" },
-  { company: "Sparkasse KölnBonn", role: "Abteilungsleitung Strategie (m/w/d)",
-    link: "https://www.sparkasse.de/jobboerse/jobangebot/abteilungsleitung-strategie-m-w-d-bei-der-sparkasse-koeln-bonn-sparkasse-koeln-bonn-209955.html",
-    address: "Im Mediapark 7, 50670 Köln", distance: "4,2 km · 8,5 Min", salary: "€90.000 – 115.000",
-    match: 75, gehalt: 86, zeit: 86, total: 81,
-    status: "active", statusText: "Aktiv – Führungsrolle (ambitioniert, in 1-2 Jahren ideal)" },
-  { company: "Detecon International", role: "Consultant / Manager IT Strategy & Transformation (d/f/m)",
-    link: "https://www.detecon.com/de/karriere/joblist",
+    status: "active", statusText: "Verifiziert – aktiv (veröffentlicht 28.06.2026)" },
+  { company: "Detecon International", role: "Consultant IT Strategy & Transformation (all genders)",
+    link: "https://www.detecon.com/en/job/69015d9d-2c83-42a5-b572-1103aa543463",
     address: "Sternengasse 14-16, 50676 Köln", distance: "1,8 km · 5 Min", salary: "€80.000 – 105.000",
     match: 80, gehalt: 68, zeit: 100, total: 81,
-    status: "active", statusText: "Aktiv – Telekom-Tochter, mehrere Strategy-&-Transformation-Rollen" },
-  { company: "DEVK Versicherungen", role: "Projektportfolio-Manager (m/w/d)",
-    link: "https://jobs.devk.de/jobs/",
-    address: "Riehler Str. 190, 50735 (Interim: Deutz)", distance: "3,5–4,6 km · 7–8 Min", salary: "€75.000 – 90.000",
-    match: 90, gehalt: 50, zeit: 92, total: 78,
-    status: "unclear", statusText: "Neuausschreibung wahrscheinlich – Bereich seit 01/2026 direkt unter Vorstandsvorsitz" },
+    status: "active", statusText: "Verifiziert – Titel & Link bestätigt (02.07.2026)" },
   { company: "REWE Group", role: "Senior Berater Inhouse Consulting (m/w/d)",
     link: "https://karriere.rewe-group.com/konzernzentrale/job/K%C3%B6ln-Senior-Berater-Inhouse-Consulting-(mwd)-NW-50933/744931801/",
     address: "Domstraße 20, 50668 Köln", distance: "3,3 km · 6 Min", salary: "€70.000 – 90.000",
     match: 90, gehalt: 45, zeit: 96, total: 78,
-    status: "active", statusText: "Aktiv (veröffentlicht 16.06.2026)" },
-  { company: "Kreissparkasse Köln", role: "Senior Projektmanager:in und Programmmanager:in (m/w/d)",
-    link: "https://www.sparkasse.de/jobboerse/jobangebot/senior-projektmanager-in-und-programmmanager-in-m-w-d-kreissparkasse-koeln-167716.html",
-    address: "Neumarkt 18-24, 50667 Köln", distance: "2,3 km · 5,6 Min", salary: "€70.000 – 90.000",
-    match: 80, gehalt: 45, zeit: 98, total: 73,
-    status: "unclear", statusText: "Posting wirkt älter (~2024) – prüfen" },
-  { company: "RheinEnergie AG", role: "Senior Expert Transformation (m/w/d)",
-    link: "https://www.rheinenergie.com/karriere/jobs/stellenangebote/",
-    address: "Parkgürtel 24, 50823 Köln (Ehrenfeld)", distance: "7,2 km · 13 Min", salary: "€80.000 – 90.000",
-    match: 85, gehalt: 55, zeit: 68, total: 73,
-    status: "active", statusText: "Aktiv" },
-  { company: "Kreissparkasse Köln", role: "KI-Manager (m/w/d) – Fokus Implementierung",
-    link: "https://www.sparkasse.de/jobboerse/jobangebot/ki-manager-m-w-d-fokus-implementierung-kreissparkasse-koeln-220458.html",
-    address: "Neumarkt 18-24, 50667 Köln", distance: "2,3 km · 5,6 Min", salary: "€75.000 – 90.000",
-    match: 65, gehalt: 50, zeit: 98, total: 67,
-    status: "active", statusText: "Aktiv (Gehalt in Anzeige bestätigt)" },
-  { company: "Toyota Kreditbank", role: "Senior Projektmanager (m/w/d)",
-    link: "https://jobs.toyota-bank-portal.de/tkg?locale=de_DE",
-    address: "Toyota-Allee 5, 50858 Köln (Marsdorf)", distance: "10,7 km · 20 Min", salary: "€75.000 – 95.000",
-    match: 82, gehalt: 55, zeit: 40, total: 65,
-    status: "active", statusText: "Aktiv – explizit Inhouse-Consulting-/Strategie-Background gesucht" },
-  { company: "Kienbaum Consultants", role: "(Senior) Consultant Organization, Strategy & HR Transformation (w/m/d)",
-    link: "https://www.stepstone.de/stellenangebote--Senior-Consultant-Organization-Strategy-HR-Transformation-w-m-d-Berlin-Koeln-Muenchen-Kienbaum-Consultants-International-GmbH-Zentrale--8024790-inline.html",
-    address: "Edmund-Rumpler-Str. 5, 51149 Köln", distance: "10,7 km · 14 Min", salary: "€70.000 – 95.000",
-    match: 75, gehalt: 50, zeit: 64, total: 65,
-    status: "active", statusText: "Aktiv – Beratungshaus, HR-/Org-Transformationsfokus" },
-  { company: "AXA Konzern AG", role: "Senior Consultant Business Development (m/w/d)",
-    link: "https://www.axa.de/karriere/jobs-consulting-strategie",
-    address: "Colonia-Allee 10-20, 51067 Köln", distance: "11,8 km · 17 Min", salary: "€75.000 – 100.000",
-    match: 70, gehalt: 59, zeit: 52, total: 63,
-    status: "unclear", statusText: "Status unklar – Berufsfeld-Seite prüfen" },
-  { company: "NetCologne", role: "Strategic Project Manager (m/w/d)",
-    link: "https://www.stepstone.de/stellenangebote--Strategic-Project-Manager-m-w-d-Koeln-NetCologne-Gesellschaft-fuer-Telekommunikation-mbH--13118458-inline.html",
-    address: "Am Coloneum 9, 50829 Köln (Ossendorf)", distance: "12,9 km · 19 Min", salary: "€70.000 – 90.000",
-    match: 78, gehalt: 45, zeit: 44, total: 61,
-    status: "active", statusText: "Aktiv – Enterprise-Transformations-/Integrationsprojekte" },
+    status: "active", statusText: "Verifiziert – aktiv (veröffentlicht 16.06.2026)" },
   { company: "ROLAND Rechtsschutz", role: "Referent (m/w/d) Unternehmensentwicklung",
     link: "https://karriere.roland-gruppe.de/HPv3.Jobs/Roland-Rechtsschutz-Versicherungs-AG/stellenangebot/40018/Referent-m-w-d-Unternehmensentwicklung-Voll-oder-Teilzeit",
     address: "Deutz-Kalker Str. 46, 50679 Köln", distance: "4,4 km · 8 Min", salary: "€65.000 – 80.000",
     match: 68, gehalt: 32, zeit: 88, total: 61,
-    status: "active", statusText: "Aktiv – Transformationsthemen & zentrale Projekte" },
+    status: "active", statusText: "Verifiziert – Link aufrufbar (02.07.2026)" },
   { company: "Malteser (Zentrale)", role: "Referent Büro der Geschäftsleitung: Schwerpunkt Strategie (m/w/d)",
     link: "https://jobs.malteser.de/de/job-offer-list/job-detail/Referent-im-Buero-der-Geschaeftsleitung:-Schwerpunkt-Strategie-m-w-d-8121.html",
     address: "Erna-Scheffler-Str. 2, 51103 Köln (Kalk)", distance: "4,7 km · 9 Min", salary: "€55.000 – 70.000",
     match: 60, gehalt: 14, zeit: 84, total: 51,
-    status: "active", statusText: "Aktiv – verbandsweiter Strategieprozess, NGO-Gehaltsniveau" }
+    status: "active", statusText: "Verifiziert – Link aufrufbar (02.07.2026)" }
 ];
 
 const container = document.getElementById("cards");

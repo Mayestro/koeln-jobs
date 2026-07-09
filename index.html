@@ -85,13 +85,12 @@
   <h1>🎯 Jobsuche Köln – Strategy, Transformation &amp; GenAI</h1>
   <p>Profil: Senior Strategy Consultant · Portfolio- &amp; Transformationssteuerung · GenAI-gestützte Arbeitsweisen</p>
   <p>Ranking-Modell: <b>50 % Match</b> (Passung zum Profil) · <b>30 % Gehalt</b> · <b>20 % Fahrzeit</b> · alle Standorte ≤ 30 Min</p>
-  <p class="updated">Basis: Lebenslauf 09.07.2026 (ALDI DX) · Landsbergstraße 42, 50678 Köln · Link-Check: 09.07.2026</p>
+  <p class="updated">Basis: Lebenslauf 09.07.2026 (ALDI DX) · Landsbergstraße 42, 50678 Köln · Nur direkt auffindbare Anzeigen · Link-Check: 09.07.2026</p>
 </header>
 
 <div class="container">
   <div class="legend">
-    <span class="badge"><span class="dot active"></span> Direktlink zur Anzeige verifiziert</span>
-    <span class="badge"><span class="dot unclear"></span> Stelle bestätigt, Portal dynamisch/cookie-geschützt (über Liste/Suche erreichbar)</span>
+    <span class="badge"><span class="dot active"></span> Jede Stelle mit direktem, klickbarem &amp; geprüftem Link</span>
   </div>
   <div class="cards" id="cards"></div>
 </div>
@@ -107,11 +106,6 @@ const jobs = [
     address: "Domstraße 20, 50668 Köln", distance: "3,3 km · 6 Min", salary: "€85.000 – 105.000",
     match: 92, gehalt: 73, zeit: 96, total: 87,
     status: "active", statusText: "Verifiziert – Direktlink aufrufbar (09.07.2026)" },
-  { company: "LANXESS", role: "AI Strategy Consultant (f/m/d)",
-    link: "https://career.lanxess.com/job/K%C3%B6ln-AI-Strategy-Consultant-(fmd)-NW-50679/1164824201/",
-    address: "Kennedyplatz 1, 50569 Köln (Deutz)", distance: "3,5 km · 7 Min", salary: "€85.000 – 115.000",
-    match: 88, gehalt: 82, zeit: 92, total: 87,
-    status: "unclear", statusText: "Sehr starker Match zum neuen CV (KI-Use-Cases, Portfolio, Workshops) – LANXESS-Portal dynamisch, über Jobsuche „AI Strategy Consultant“ öffnen" },
   { company: "REWE Group", role: "(Senior) Berater / Projektleiter Strategie (m/w/d)",
     link: "https://karriere.rewe-group.com/konzernzentrale/job/K%C3%B6ln-(Senior)-Berater-Projektleiter-Strategie-(mwd)-NW-50933/1287747001/",
     address: "Domstraße 20, 50668 Köln", distance: "3,3 km · 6 Min", salary: "€75.000 – 95.000",
@@ -132,11 +126,6 @@ const jobs = [
     address: "Magnusstraße 11, 50672 Köln", distance: "3,2 km · 7 Min", salary: "€75.000 – 95.000",
     match: 85, gehalt: 55, zeit: 92, total: 77,
     status: "active", statusText: "Verifiziert – aktiv, Köln inkl.; Match durch neuen GenAI-CV aufgewertet" },
-  { company: "RTL Deutschland", role: "Business Development & Strategy Manager (m/f/d)",
-    link: "https://jobsearch.createyourowncareer.com/RTL/job/K%C3%B6ln-Business-Development-&-Strategy-Manager-(mfd)-NW-50679/282448-de_DE/",
-    address: "Picassoplatz 1, 50679 Köln (Deutz)", distance: "3,6 km · 7 Min", salary: "€75.000 – 95.000",
-    match: 85, gehalt: 55, zeit: 92, total: 77,
-    status: "unclear", statusText: "Anzeige indexiert – RTL-Portal cookie-geschützt, ggf. über Jobsuche „Business Development & Strategy“ öffnen" },
   { company: "Meliorate GmbH", role: "Manager (m/w/d) Strategieberatung mit Projekt- & Kundenverantwortung",
     link: "https://to.indeed.com/aazpqyxdcrdv",
     address: "Köln-Zentrum (Adresse im Prozess)", distance: "~4 km · ~8 Min", salary: "€80.000 – 100.000",
@@ -157,11 +146,6 @@ const jobs = [
     address: "Börsenplatz 1, 50667 Köln", distance: "2,9 km · 6 Min", salary: "€65.000 – 90.000",
     match: 68, gehalt: 42, zeit: 96, total: 66,
     status: "active", statusText: "Verifiziert – aktiv, Standort Köln inkl. (09.07.2026)" },
-  { company: "Telekom Strategy Consulting", role: "(Senior) Consultant Strategie & Transformation (m/w/d)",
-    link: "https://careers.telekom.com/de/telekom-strategy-consulting",
-    address: "Bonn (Landgrabenweg 151)", distance: "34 km · 30 Min ⚠️", salary: "€75.000 – 95.000",
-    match: 90, gehalt: 55, zeit: 0, total: 62,
-    status: "unclear", statusText: "Mehrere Stellen bestätigt (Inhouse Consulting der Telekom) – dynamisches Portal, Standort Bonn an der 30-Min-Grenze" },
   { company: "ROLAND Rechtsschutz", role: "Referent (m/w/d) Unternehmensentwicklung",
     link: "https://karriere.roland-gruppe.de/HPv3.Jobs/Roland-Rechtsschutz-Versicherungs-AG/stellenangebot/40018/Referent-m-w-d-Unternehmensentwicklung-Voll-oder-Teilzeit",
     address: "Deutz-Kalker Str. 46, 50679 Köln", distance: "4,4 km · 8 Min", salary: "€65.000 – 80.000",
